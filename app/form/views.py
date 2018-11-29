@@ -11,7 +11,7 @@ import mimetypes
 def convert(f):
     pos = f.rfind('.')
     new_name = f[:pos] + '-gray.mp4'
-    ffmpeg.input(f).output(new_name, vf='format=gray', pix_fmt='yuv420p').run("/app/bin/ffmpeg")
+    ffmpeg.input(f).output(new_name, vf='format=gray', pix_fmt='yuv420p').run()
     return new_name
 
 def simple_upload(request):
