@@ -1,9 +1,9 @@
 version: '3'
 services:
     proxy:
-        image: localhost:5000/proxy:latest
+        image: proxy:latest
         ports:
             - 443:443
 
     django:
-        image: localhost:5000/django-app:latest
+        image: django-app:latest
