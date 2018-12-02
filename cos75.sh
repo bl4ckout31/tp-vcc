@@ -29,7 +29,8 @@ EOF
 
 echo $ip_addr > /home/centos/ip_manager.txt
 systemctl enable --now docker
-docker run -d --restart=always -p 5000:5000 --name registry registry
+docker service create --name registry --p 5000:5000 registry 
+#docker run -d --restart=always -p 5000:5000 --name registry registry
 
 yum install -y docker-compose git httpd-tools
 git clone https://github.com/bl4ckout31/tp-vcc.git /tp-vcc
