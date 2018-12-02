@@ -1,18 +1,9 @@
 version: '3'
 services:
     proxy:
-        image: nginx:alpine
-        container_name: proxy
-        volumes:
-            - ./nginx.conf:/etc/nginx/nginx.conf
-            - ./nginx.key:/etc/nginx/nginx.key
-            - ./nginx.crt:/etc/nginx/nginx.crt
-            - ./passwd:/etc/nginx/passwd
+        image: localhost:5000/proxy:latest
         ports:
             - 443:443
 
     django:
-        image: test
-        container_name: django
-        expose:
-            - "8000"
+        image: localhost:5000/django-app:latest
