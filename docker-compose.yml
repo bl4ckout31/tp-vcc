@@ -4,6 +4,10 @@ services:
         image: proxy:latest
         ports:
             - 443:443
+        deploy:
+            replicas: 4
 
     django:
         image: django-app:latest
+        deploy:
+            replicas: 4
