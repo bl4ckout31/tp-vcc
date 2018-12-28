@@ -20,6 +20,7 @@ done
 echo "Fetching docker-swarm token and IP..."
 scp -q centos@$1:~/swarm-join.txt .
 scp -q centos@$1:~/ip_manager.txt .
+scp -q docker-compose.yml centos@$1:~/
 
 echo "Booting workers..."
 nova boot --min-count 3 --max-count 3 --flavor m1.small --image FC28atomic --nic net-id=c1445469-4640-4c5a-ad86-9c0cb6650cca --security-group default --meta ip_manager="$(cat ip_manager.txt)" --meta swarm-join="$(cat swarm-join.txt)" --user-data fc28-atomic.sh --key-name mykey FC28atomic_${OS_USERNAME}
