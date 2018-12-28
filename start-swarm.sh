@@ -5,8 +5,13 @@ if [ $# -ne 1 ]; then
     exit 1
 fi
 
+if [ ! -r "password.txt" ]; then
+    echo "password.txt must exists and be readable"
+    exit 2
+fi
+
 echo "Booting Manager with ip $1..."
-nova boot --flavor m1.small --image COS75 --nic net-id=c1445469-4640-4c5a-ad86-9c0cb6650cca --security-group default --key-name mykey --user-data cos75.sh COS75_${OS_USERNAME}
+nova boot --flavor m1.small --image COS75 --nic net-id=c1445469-4640-4c5a-ad86-9c0cb6650cca --security-group default --meta password="$(cat password.txt)" --key-name mykey --user-data cos75.sh COS75_${OS_USERNAME}
 nova floating-ip-associate COS75_$OS_USERNAME $1
 
 res=1

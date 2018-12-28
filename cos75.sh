@@ -11,6 +11,7 @@ yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce
 yum install -y docker-ce
 
 ip_addr=$(ip a show eth0 | grep "inet 192" | sed -e "s/[[:space:]]\+/ /g" | cut -d " " -f 3 | cut -d "/" -f 1)
+password=$(curl http://169.254.169.254/openstack/latest/meta_data.json | python -m json.tool | grep password | sed -e "s/[[:space:]]\+/ /g" | cut -d "\"" -f 4)
 mkdir /etc/docker
 cat > /etc/docker/daemon.json << EOF
 {
@@ -41,7 +42,7 @@ docker push $ip_addr:5000/django-app:latest
 
 cd /tp-vcc/proxy
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -subj "/C=FR/ST=Toulouse/L=Toulouse/O=Université Paul Sabatier/CN=tp-vcc" -keyout nginx.key -out nginx.crt
-htpasswd -cb passwd "tp-vcc" "789456123"
+htpasswd -cb passwd "tp-vcc" "$password"
 docker build -t proxy:latest .
 docker tag proxy:latest $ip_addr:5000/proxy:latest
 docker push $ip_addr:5000/proxy:latest
