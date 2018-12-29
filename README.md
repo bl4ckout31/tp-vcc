@@ -1,6 +1,6 @@
-# Proccessing Infrastructure
+# Processing Infrastructure
 
-The Fabspace image proccessing as been replaced with a simple Django App with a form that takes a video and make a grayscale version of it with FFmpeg. The user can then download the result.
+The Fabspace image processing as been replaced with a simple Django App with a form that takes a video and make a grayscale version of it with FFmpeg. The user can then download the result. The website will timeout if the video takes too long to process, prefer short videos.
 
 Clone the repo:
 ```bash
@@ -9,7 +9,7 @@ git clone https://github.com/bl4ckout31/tp-vcc.git
 
 `cd` into the new folder:
 ```bash
-cd tp-vcc
+cd tp-vcc/processing/
 ```
 
 Set the password for the website:
@@ -53,5 +53,6 @@ l8cfp4d4m2oi        app_proxy           replicated          4/4                 
 z6gbi9o9f033        app_django          replicated          4/4                 django-app:latest
 ```
 
-You can now open https://\<manager public IP\> in your browser. 
+You can now open https://\<manager public IP\> in your browser.
+The certificate being self-signed, you will be prompt about an unsecured connection.
 Username is `tp-vcc` and password what you set at the begining.
